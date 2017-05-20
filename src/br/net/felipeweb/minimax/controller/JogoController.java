@@ -53,14 +53,15 @@ public class JogoController implements Initializable {
     }
 
     @FXML
-    public void marcaX(ActionEvent me) {
+    public void marcaX(ActionEvent me) throws InterruptedException {
         if (tabuleiro.getJogador().equals(Jogador.Min)) {
             //Eu Joguei
             Button celula = (Button) me.getSource();
             if (celula.getText() == null || "".equals(celula.getText())) {
+                System.out.println("x setado");
                 celula.setText("X");
                 tabuleiro.setX(Integer.parseInt(celula.getId().charAt(1) + "") - 1, Integer.parseInt(celula.getId().charAt(3) + "") - 1);
-
+                setTabuleiro(tabuleiro);
                 if (!tabuleiro.isTerminal()) {
                     System.out.println("Joga Computador");
                     //Calculo o Minimax
@@ -87,7 +88,6 @@ public class JogoController implements Initializable {
                         System.out.println("empatou");
                         empate++;
                     }
-
                     this.init();
                 }
 
